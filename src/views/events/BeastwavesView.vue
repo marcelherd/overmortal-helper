@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p>About</p>
+    <p>Beastwaves</p>
   </main>
 </template>
 

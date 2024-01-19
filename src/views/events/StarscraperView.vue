@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p>About</p>
+    <p>Starscraper</p>
   </main>
 </template>
 
