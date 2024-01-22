@@ -1,31 +1,9 @@
-import { Item } from '../items';
-import type { Challenge, Reward, Shop } from './types';
+import { Items } from '../items';
+import type { Challenge, Shop } from './types';
+import { getCumulativeRewardsFromChallenge } from './util';
 
 export function getCumulativeRewards(constructedFloors: number) {
-  const achievedRewards: Reward[] = [];
-
-  for (const round of challenge) {
-    // If all steps in the round have been completed, add the round rewards as well as the steps rewards
-    if (round.steps.every((step) => constructedFloors >= step.requirement)) {
-      achievedRewards.push(...round.rewards);
-      achievedRewards.push(...round.steps.flatMap((step) => step.rewards));
-    } else {
-      // Otherwise, only add the steps rewards for each step that has been completed
-      for (const step of round.steps) {
-        if (constructedFloors >= step.requirement) {
-          achievedRewards.push(...step.rewards);
-        }
-      }
-    }
-  }
-
-  const rewardedItems: Partial<Record<keyof typeof Item, number>> = {};
-
-  for (const reward of achievedRewards) {
-    rewardedItems[reward.item] = (rewardedItems[reward.item] ?? 0) + reward.quantity;
-  }
-
-  return rewardedItems;
+  return getCumulativeRewardsFromChallenge(challenge, constructedFloors);
 }
 
 export const challenge: Challenge = [
@@ -33,15 +11,15 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         quantity: 5,
       },
       {
-        item: Item.TechniquePoints,
+        item: Items.TechniquePoints,
         quantity: 1000,
       },
       {
-        item: Item.AstralPearl,
+        item: Items.AstralPearl,
         quantity: 40,
       },
     ],
@@ -50,15 +28,15 @@ export const challenge: Challenge = [
         requirement: 5,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 1,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 200,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 3,
           },
         ],
@@ -67,15 +45,15 @@ export const challenge: Challenge = [
         requirement: 10,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 2,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 200,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 5,
           },
         ],
@@ -84,15 +62,15 @@ export const challenge: Challenge = [
         requirement: 20,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 3,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 300,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 5,
           },
         ],
@@ -101,15 +79,15 @@ export const challenge: Challenge = [
         requirement: 30,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 3,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 300,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 5,
           },
         ],
@@ -118,15 +96,15 @@ export const challenge: Challenge = [
         requirement: 50,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 3,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 400,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 10,
           },
         ],
@@ -135,15 +113,15 @@ export const challenge: Challenge = [
         requirement: 70,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 3,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 400,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 10,
           },
         ],
@@ -152,15 +130,15 @@ export const challenge: Challenge = [
         requirement: 100,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 3,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 400,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 15,
           },
         ],
@@ -171,15 +149,15 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         quantity: 10,
       },
       {
-        item: Item.TechniquePoints,
+        item: Items.TechniquePoints,
         quantity: 1500,
       },
       {
-        item: Item.AstralPearl,
+        item: Items.AstralPearl,
         quantity: 60,
       },
     ],
@@ -188,15 +166,15 @@ export const challenge: Challenge = [
         requirement: 120,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 500,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 10,
           },
         ],
@@ -205,15 +183,15 @@ export const challenge: Challenge = [
         requirement: 140,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 500,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 10,
           },
         ],
@@ -222,15 +200,15 @@ export const challenge: Challenge = [
         requirement: 170,
         rewards: [
           {
-            item: Item.LivingEarth,
+            item: Items.LivingEarth,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 600,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 15,
           },
         ],
@@ -239,15 +217,15 @@ export const challenge: Challenge = [
         requirement: 200,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 600,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 15,
           },
         ],
@@ -256,15 +234,15 @@ export const challenge: Challenge = [
         requirement: 240,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 700,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 20,
           },
         ],
@@ -273,15 +251,15 @@ export const challenge: Challenge = [
         requirement: 280,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 700,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 20,
           },
         ],
@@ -290,15 +268,15 @@ export const challenge: Challenge = [
         requirement: 330,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 5,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 800,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 25,
           },
         ],
@@ -309,15 +287,15 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         quantity: 15,
       },
       {
-        item: Item.TechniquePoints,
+        item: Items.TechniquePoints,
         quantity: 2000,
       },
       {
-        item: Item.AstralPearl,
+        item: Items.AstralPearl,
         quantity: 80,
       },
     ],
@@ -326,15 +304,15 @@ export const challenge: Challenge = [
         requirement: 370,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 900,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 20,
           },
         ],
@@ -343,15 +321,15 @@ export const challenge: Challenge = [
         requirement: 410,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 900,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 20,
           },
         ],
@@ -360,15 +338,15 @@ export const challenge: Challenge = [
         requirement: 460,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1000,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 25,
           },
         ],
@@ -377,15 +355,15 @@ export const challenge: Challenge = [
         requirement: 510,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1000,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 25,
           },
         ],
@@ -394,15 +372,15 @@ export const challenge: Challenge = [
         requirement: 570,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1100,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -411,15 +389,15 @@ export const challenge: Challenge = [
         requirement: 630,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1100,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -428,15 +406,15 @@ export const challenge: Challenge = [
         requirement: 700,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 7,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1200,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -447,15 +425,15 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Item.CreationJade,
+        item: Items.CreationJade,
         quantity: 5,
       },
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         quantity: 20,
       },
       {
-        item: Item.AstralPearl,
+        item: Items.AstralPearl,
         quantity: 100,
       },
     ],
@@ -464,15 +442,15 @@ export const challenge: Challenge = [
         requirement: 760,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1200,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -481,15 +459,15 @@ export const challenge: Challenge = [
         requirement: 820,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1200,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -498,15 +476,15 @@ export const challenge: Challenge = [
         requirement: 890,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1300,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -515,15 +493,15 @@ export const challenge: Challenge = [
         requirement: 960,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1300,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -532,15 +510,15 @@ export const challenge: Challenge = [
         requirement: 1040,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1400,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -549,15 +527,15 @@ export const challenge: Challenge = [
         requirement: 1120,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1500,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -566,15 +544,15 @@ export const challenge: Challenge = [
         requirement: 1200,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 10,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1600,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -585,15 +563,15 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Item.CreationJade,
+        item: Items.CreationJade,
         quantity: 5,
       },
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         quantity: 25,
       },
       {
-        item: Item.AstralPearl,
+        item: Items.AstralPearl,
         quantity: 120,
       },
     ],
@@ -602,15 +580,15 @@ export const challenge: Challenge = [
         requirement: 1280,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1600,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -619,15 +597,15 @@ export const challenge: Challenge = [
         requirement: 1360,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1600,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -636,15 +614,15 @@ export const challenge: Challenge = [
         requirement: 1450,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1700,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -653,15 +631,15 @@ export const challenge: Challenge = [
         requirement: 1540,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1700,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -670,15 +648,15 @@ export const challenge: Challenge = [
         requirement: 1640,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1800,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -687,15 +665,15 @@ export const challenge: Challenge = [
         requirement: 1740,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 1900,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -704,15 +682,15 @@ export const challenge: Challenge = [
         requirement: 1830,
         rewards: [
           {
-            item: Item.Thunderite,
+            item: Items.Thunderite,
             quantity: 15,
           },
           {
-            item: Item.TechniquePoints,
+            item: Items.TechniquePoints,
             quantity: 2000,
           },
           {
-            item: Item.AstralPearl,
+            item: Items.AstralPearl,
             quantity: 30,
           },
         ],
@@ -726,19 +704,19 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Item.NimbusJadeslip,
+        item: Items.NimbusJadeslip,
         limit: 1,
         quantity: 50,
         price: 50,
       },
       {
-        item: Item.TechniquePoints,
+        item: Items.TechniquePoints,
         limit: 999, // TODO: fix
         quantity: 500,
         price: 50,
       },
       {
-        item: Item.Forgestone,
+        item: Items.Forgestone,
         limit: 3,
         quantity: 100,
         price: 50,
@@ -749,19 +727,19 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Item.PetStone,
+        item: Items.PetStone,
         limit: 1, // TODO: check
         quantity: 20,
         price: 80,
       },
       {
-        item: Item.PetJadeslip,
+        item: Items.PetJadeslip,
         limit: 1,
         quantity: 200,
         price: 80,
       },
       {
-        item: Item.Alioth,
+        item: Items.Alioth,
         limit: 3,
         quantity: 1,
         price: 100,
@@ -772,19 +750,19 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Item.StardustChestIII,
+        item: Items.StardustChestIII,
         limit: 1,
         quantity: 3,
         price: 220,
       },
       {
-        item: Item.CarvingJade,
+        item: Items.CarvingJade,
         limit: 1,
         quantity: 5,
         price: 250,
       },
       {
-        item: Item.AncientJadeslip,
+        item: Items.AncientJadeslip,
         limit: 1,
         quantity: 400,
         price: 200,
@@ -795,19 +773,19 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Item.CosmicJadeslip,
+        item: Items.CosmicJadeslip,
         limit: 1,
         quantity: 200,
         price: 240,
       },
       {
-        item: Item.SpiritlandToken,
+        item: Items.SpiritlandToken,
         limit: 1,
         quantity: 20,
         price: 400,
       },
       {
-        item: Item.AdvancementKnowledge,
+        item: Items.AdvancementKnowledge,
         limit: 1,
         quantity: 20,
         price: 400,
@@ -818,19 +796,19 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Item.TechniqueGuide,
+        item: Items.TechniqueGuide,
         limit: 2,
         quantity: 30,
         price: 900,
       },
       {
-        item: Item.MythicStardust,
+        item: Items.MythicStardust,
         limit: 2,
         quantity: 100,
         price: 600,
       },
       {
-        item: Item.CreationJade,
+        item: Items.CreationJade,
         limit: 2,
         quantity: 10,
         price: 1000,

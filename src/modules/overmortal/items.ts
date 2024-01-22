@@ -1,11 +1,11 @@
 export type Offer = {
-  item: keyof typeof Item;
+  item: Item;
   quantity: number;
   limit: number;
   price: number;
 };
 
-export const Item = {
+export const Items = {
   /** Adventure */
   TreasureLantern: 'TreasureLantern',
   EverfrostJade: 'EverfrostJade',
@@ -41,6 +41,8 @@ export const Item = {
   AdvancementKnowledge: 'AdvancementKnowledge',
   MythicStardust: 'MythicStardust',
 } as const;
+
+export type Item = keyof typeof Items;
 
 export const Quality = {
   Grey: 'Grey',
