@@ -20,4 +20,5 @@ export type Shop = [Floor, Floor, Floor, Floor, Floor];
 
 export type Floor = {
   offers: [Offer, Offer, Offer];
+  exchangeBonus: Reward;
 };

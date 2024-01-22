@@ -722,6 +722,10 @@ export const shop: Shop = [
         price: 50,
       },
     ],
+    exchangeBonus: {
+      item: Items.LivingEarth,
+      quantity: 3,
+    },
   },
   // Floor 2
   {
@@ -745,6 +749,10 @@ export const shop: Shop = [
         price: 100,
       },
     ],
+    exchangeBonus: {
+      item: Items.LivingEarth,
+      quantity: 5,
+    },
   },
   // Floor 3
   {
@@ -768,6 +776,10 @@ export const shop: Shop = [
         price: 200,
       },
     ],
+    exchangeBonus: {
+      item: Items.LivingEarth,
+      quantity: 7,
+    },
   },
   // Floor 4
   {
@@ -791,6 +803,10 @@ export const shop: Shop = [
         price: 400,
       },
     ],
+    exchangeBonus: {
+      item: Items.LivingEarth,
+      quantity: 9,
+    },
   },
   // Floor 5
   {
@@ -814,5 +830,9 @@ export const shop: Shop = [
         price: 1000,
       },
     ],
+    exchangeBonus: {
+      item: Items.LivingEarth,
+      quantity: 12,
+    },
   },
 ];
