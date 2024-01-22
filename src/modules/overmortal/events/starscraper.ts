@@ -1,5 +1,5 @@
 import { Item } from '../items';
-import type { Challenge, Reward } from './types';
+import type { Challenge, Reward, Shop } from './types';
 
 export function getCumulativeRewards(constructedFloors: number) {
   const achievedRewards: Reward[] = [];
@@ -716,6 +716,124 @@ export const challenge: Challenge = [
             quantity: 30,
           },
         ],
+      },
+    ],
+  },
+];
+
+export const shop: Shop = [
+  // Floor 1
+  {
+    offers: [
+      {
+        item: Item.NimbusJadeslip,
+        limit: 1,
+        quantity: 50,
+        price: 50,
+      },
+      {
+        item: Item.TechniquePoints,
+        limit: 999, // TODO: fix
+        quantity: 500,
+        price: 50,
+      },
+      {
+        item: Item.Forgestone,
+        limit: 3,
+        quantity: 100,
+        price: 50,
+      },
+    ],
+  },
+  // Floor 2
+  {
+    offers: [
+      {
+        item: Item.PetStone,
+        limit: 1, // TODO: check
+        quantity: 20,
+        price: 80,
+      },
+      {
+        item: Item.PetJadeslip,
+        limit: 1,
+        quantity: 200,
+        price: 80,
+      },
+      {
+        item: Item.Alioth,
+        limit: 3,
+        quantity: 1,
+        price: 100,
+      },
+    ],
+  },
+  // Floor 3
+  {
+    offers: [
+      {
+        item: Item.StardustChestIII,
+        limit: 1,
+        quantity: 3,
+        price: 220,
+      },
+      {
+        item: Item.CarvingJade,
+        limit: 1,
+        quantity: 5,
+        price: 250,
+      },
+      {
+        item: Item.AncientJadeslip,
+        limit: 1,
+        quantity: 400,
+        price: 200,
+      },
+    ],
+  },
+  // Floor 4
+  {
+    offers: [
+      {
+        item: Item.CosmicJadeslip,
+        limit: 1,
+        quantity: 200,
+        price: 240,
+      },
+      {
+        item: Item.SpiritlandToken,
+        limit: 1,
+        quantity: 20,
+        price: 400,
+      },
+      {
+        item: Item.AdvancementKnowledge,
+        limit: 1,
+        quantity: 20,
+        price: 400,
+      },
+    ],
+  },
+  // Floor 5
+  {
+    offers: [
+      {
+        item: Item.TechniqueGuide,
+        limit: 2,
+        quantity: 30,
+        price: 900,
+      },
+      {
+        item: Item.MythicStardust,
+        limit: 2,
+        quantity: 100,
+        price: 600,
+      },
+      {
+        item: Item.CreationJade,
+        limit: 2,
+        quantity: 10,
+        price: 1000,
       },
     ],
   },

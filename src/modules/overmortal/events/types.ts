@@ -13,7 +13,7 @@ export type Step = {
   rewards: [Reward, Reward, Reward];
 };
 
-export type Reward = Omit<Offer, 'limit'>;
+export type Reward = Omit<Offer, 'limit' | 'price'>;
 
 /** Weekly Event Exchange Shop */
 export type Shop = [Floor, Floor, Floor, Floor, Floor];

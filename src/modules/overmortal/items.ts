@@ -2,6 +2,7 @@ export type Offer = {
   item: keyof typeof Item;
   quantity: number;
   limit: number;
+  price: number;
 };
 
 export const Item = {
@@ -28,6 +29,17 @@ export const Item = {
   SpecialR3RuneChest: 'SpecialR3RuneChest',
   StarUpStone: 'StarUpStone',
   BerpentEgg: 'BerpentEgg',
+  NimbusJadeslip: 'NimbusJadeslip',
+  Forgestone: 'Forgestone',
+  PetStone: 'PetStone',
+  PetJadeslip: 'PetJadeslip',
+  StardustChestIII: 'StardustChestIII',
+  CarvingJade: 'CarvingJade',
+  AncientJadeslip: 'AncientJadeslip',
+  CosmicJadeslip: 'CosmicJadeslip',
+  SpiritlandToken: 'SpiritlandToken',
+  AdvancementKnowledge: 'AdvancementKnowledge',
+  MythicStardust: 'MythicStardust',
 } as const;
 
 export const Quality = {
