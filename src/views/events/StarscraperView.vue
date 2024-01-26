@@ -2,11 +2,12 @@
 import { ref, computed } from 'vue';
 import InputNumber from 'primevue/inputnumber';
 
-import { getCumulativeRewards } from '@/modules/overmortal/events/starscraper';
+import { challenge } from '@/modules/overmortal/events/starscraper';
+import { getCumulativeRewardsFromChallenge } from '@/modules/overmortal/events/calculator';
 
 const constructions = ref(0);
 
-const rewards = computed(() => getCumulativeRewards(constructions.value));
+const rewards = computed(() => getCumulativeRewardsFromChallenge(challenge, constructions.value));
 
 console.log('rewards', rewards);
 </script>
