@@ -49,8 +49,13 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
   let acquiredCurrency = 0;
 
   while (usedEventItems < REQUIRED_ITEMS_UPPER_LIMIT) {
+    console.log('acquiredCurrency', acquiredCurrency);
+
     // If we exchanged for all desired offers, we know the required amount of items
     if (JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
+      console.log('Done');
+      console.log('usedEventItems', usedEventItems);
+      console.log('bonusEventItems', bonusEventItems);
       if (event === Events.Starscraper) {
         // We get three free attempts per day for Starscraper
         return usedEventItems - bonusEventItems - 7 * 3; // TODO: add bonusEventItems granted by the last iteration to correct the result
