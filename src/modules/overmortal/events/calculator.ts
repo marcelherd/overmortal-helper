@@ -66,6 +66,7 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
     // Starscraper event has a 10% chance of creating a golden room when doing construction or guaranteed every ten constructions
     if (event === Events.Starscraper) {
       if (Math.random() <= 0.1 || usedEventItems % 10 === 0) {
+        console.log('Hit a golden room, adding 5 currency');
         // Golden rooms always award between four and six Astral Pearls, assuming five for simplicity
         acquiredCurrency += 5;
       }
@@ -78,6 +79,7 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
     const { requirement, rewards } = milestoneToCheck;
 
     if (usedEventItems >= requirement) {
+      console.log('Finished milestone', currentMilestone, 'of round', currentRound);
       // Check if we were awarded additional event items for finishing the milestone and if so, add them
       const rewardedEventItems = rewards.find((reward) => reward.item === eventItem);
       if (rewardedEventItems) {
