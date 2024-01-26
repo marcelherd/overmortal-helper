@@ -1,10 +1,5 @@
 import { Items } from '../items';
 import type { Challenge, Shop } from './types';
-import { getCumulativeRewardsFromChallenge } from './util';
-
-export function getCumulativeRewards(constructedFloors: number) {
-  return getCumulativeRewardsFromChallenge(challenge, constructedFloors);
-}
 
 export const challenge: Challenge = [
   /** Round 1 */
@@ -23,7 +18,7 @@ export const challenge: Challenge = [
         quantity: 40,
       },
     ],
-    steps: [
+    milestones: [
       {
         requirement: 5,
         rewards: [
@@ -161,7 +156,7 @@ export const challenge: Challenge = [
         quantity: 60,
       },
     ],
-    steps: [
+    milestones: [
       {
         requirement: 120,
         rewards: [
@@ -299,7 +294,7 @@ export const challenge: Challenge = [
         quantity: 80,
       },
     ],
-    steps: [
+    milestones: [
       {
         requirement: 370,
         rewards: [
@@ -437,7 +432,7 @@ export const challenge: Challenge = [
         quantity: 100,
       },
     ],
-    steps: [
+    milestones: [
       {
         requirement: 760,
         rewards: [
@@ -575,7 +570,7 @@ export const challenge: Challenge = [
         quantity: 120,
       },
     ],
-    steps: [
+    milestones: [
       {
         requirement: 1280,
         rewards: [
