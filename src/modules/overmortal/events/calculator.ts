@@ -9,7 +9,7 @@ import {
   Events,
 } from './events';
 
-export const REQUIRED_ITEMS_UPPER_LIMIT = 100000;
+export const REQUIRED_ITEMS_UPPER_LIMIT = 1000000;
 
 /**
  * Calculates the required number of items to reach the necessary amount of currency to exchange for
@@ -25,9 +25,6 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
   const challenge = getChallengeByEvent(event);
   const eventItem = getEventItem(event);
   const eventCurrency = getEventCurrency(event);
-
-  // TODO: Consider three free attempts per day for Starscraper
-  // TODO: Consider golden room rewarding additional currency for Starscraper (every 10 constructions iirc?)
 
   const exchangedItems = [
     [0, 0, 0],
@@ -61,12 +58,12 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
       return usedEventItems - bonusEventItems; // TODO: add bonusEventItems granted by the last iteration to correct the result
     }
 
-    if (
-      currentRound === challenge.length - 1 &&
-      currentMilestone === challenge[currentRound].milestones.length - 1
-    ) {
-      // maybe this should be an error idk my brain is fried
-      // but only if we cant acquire more currency without finishing milestones
+    // Starscraper event has a 10% chance of creating a golden room when doing construction or guaranteed every ten constructions
+    if (event === Events.Starscraper) {
+      if (Math.random() <= 0.1 || usedEventItems % 10 === 0) {
+        // Golden rooms always award between four and six Astral Pearls, assuming five for simplicity
+        acquiredCurrency += 5;
+      }
     }
 
     usedEventItems++;
@@ -119,7 +116,6 @@ export function calculateRequiredItems(cart: ShoppingCart, event: Event) {
     }
   }
 
-  // Probably?
   throw new Error('Could not calculate required items');
 }
 
