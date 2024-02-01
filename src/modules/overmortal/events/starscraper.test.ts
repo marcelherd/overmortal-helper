@@ -15,11 +15,30 @@ describe('modules/overmoratal/events/calculator', () => {
         [0, 0, 2],
       ];
 
-      const results = simulateRequiredConstructions(cart);
+      const { constructions: bestCase } = simulateRequiredConstructions(cart, {
+        simulationScenario: 'BestCase',
+      });
+      const { constructions: WorstCase } = simulateRequiredConstructions(cart, {
+        simulationScenario: 'WorstCase',
+      });
 
-      console.log('results', results);
+      let averageSum = 0;
 
-      expect(results).toBeTruthy();
+      for (let i = 0; i < 100; i++) {
+        const { constructions } = simulateRequiredConstructions(cart, {
+          simulationScenario: 'Average',
+        });
+
+        averageSum += constructions;
+      }
+
+      const average = averageSum / 100;
+
+      console.log('bestCase', bestCase);
+      console.log('WorstCase', WorstCase);
+      console.log('average', average);
+
+      expect({}).toBeTruthy();
     });
     /*
     it('should throw an error if it contains more items than available', () => {

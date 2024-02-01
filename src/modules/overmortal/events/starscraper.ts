@@ -1,4 +1,5 @@
 import { Items } from '../items';
+import { SimulationScenarios, type SimulationScenario } from '../simulation';
 import type { Challenge, Shop, ShoppingCart } from './types';
 
 export const MAX_SIMULATED_CONSTRUCTIONS = 100000;
@@ -8,6 +9,14 @@ export const GOLDEN_ROOM_CHANCE = 0.1;
 export const GOLDEN_ROOM_MIN_ASTRAL_PEARLS = 4;
 export const GOLDEN_ROOM_MAX_ASTRAL_PEARLS = 6;
 
+export type StarscraperSimulationOptions = {
+  /** The number of Astral Pearls that we already have by buying them from the event shop */
+  initialAstralPearls?: number;
+
+  /** Affects the chance of golden rooms occuring as well as the amount of currency obtained through them */
+  simulationScenario?: SimulationScenario;
+};
+
 /**
  * TODO
  *
@@ -15,7 +24,13 @@ export const GOLDEN_ROOM_MAX_ASTRAL_PEARLS = 6;
  * @param initialAstralPearls - the number of Astral Pearls that we already have by buying them from the event shop
  * @returns TODO
  */
-export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralPearls?: number) {
+export function simulateRequiredConstructions(
+  cart: ShoppingCart,
+  options?: StarscraperSimulationOptions
+) {
+  const initialAstralPearls = options?.initialAstralPearls ?? 0;
+  const simulationScenario = options?.simulationScenario ?? SimulationScenarios.Average;
+
   const exchangedItems = [
     [0, 0, 0],
     [0, 0, 0],
@@ -25,7 +40,7 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
   ];
 
   let constructions = 0;
-  let astralPearls = initialAstralPearls ?? 0;
+  let astralPearls = initialAstralPearls;
 
   let currentRound = 0;
   let currentMilestone = 0;
@@ -35,7 +50,6 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
   while (constructions < MAX_SIMULATED_CONSTRUCTIONS) {
     // If we exchanged for all desired offers, we know the required number of constructions to purchase everything
     if (JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
-      console.log('All offers exchanged');
       // TODO: adjust return type
       return {
         constructions,
@@ -45,10 +59,28 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
     // TODO: keep track of ALL received rewards
 
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
-    // Technically there is an additional chance of 10% for each construction to create a golden room, but we ignore that as we care about the worst case only
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
-      console.log('Golden room', constructions);
-      astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
+      switch (simulationScenario) {
+        case SimulationScenarios.WorstCase:
+          astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
+          break;
+        case SimulationScenarios.Average:
+          astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
+          break;
+        case SimulationScenarios.BestCase:
+          astralPearls += GOLDEN_ROOM_MAX_ASTRAL_PEARLS;
+          break;
+      }
+    } else {
+      // There is still a chance for a golden room to occur on every construction that is not a multiple of ten
+      // We only consider this chance if we are not in the worst case scenario
+      const goldenRoomOccured = Math.random() < GOLDEN_ROOM_CHANCE;
+
+      if (simulationScenario === SimulationScenarios.Average && goldenRoomOccured) {
+        astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
+      } else if (simulationScenario === SimulationScenarios.BestCase) {
+        astralPearls += GOLDEN_ROOM_MAX_ASTRAL_PEARLS;
+      }
     }
 
     constructions++;
@@ -58,16 +90,9 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
     const { requirement, rewards } = milestoneToCheck;
 
     if (constructions >= requirement && !finishedLastMilestone) {
-      console.log('Finished milestone', currentMilestone, 'of round', currentRound);
       // Check if we were awarded Astral Pearls for finishing the milestone and if so, add it to our total
       const rewardedAstralPearls = rewards.find((reward) => reward.item === Items.AstralPearl);
       if (rewardedAstralPearls) {
-        console.log(
-          'Awarding Astral Pearls for finishing the milestone',
-          rewardedAstralPearls.quantity,
-          'total is now',
-          astralPearls
-        );
         astralPearls += rewardedAstralPearls.quantity;
       }
 
@@ -81,23 +106,11 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
         );
 
         if (rewardedAstralPearlsFromRound) {
-          console.log(
-            'Awarding Astral Pearls for finishing the round',
-            rewardedAstralPearlsFromRound.quantity,
-            'total is now',
-            astralPearls
-          );
           astralPearls += rewardedAstralPearlsFromRound.quantity;
         }
 
         // If we received rewards for the last milestone of the last round, we should no longer receive any rewards from milestones
         if (currentRound === challenge.length - 1) {
-          console.log(
-            'Finished last round, current milestone',
-            currentMilestone,
-            'current round',
-            currentRound
-          );
           finishedLastMilestone = true;
         }
       }
@@ -115,15 +128,6 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
           exchangedItems[floorIndex][offerIndex] < cart[floorIndex][offerIndex] &&
           astralPearls >= offer.price
         ) {
-          console.log(
-            'Exchanging for offer',
-            floorIndex,
-            offerIndex,
-            'for',
-            offer.price,
-            'Astral Pearls'
-          );
-          console.log('Astral Pearls before', astralPearls, 'after', astralPearls - offer.price);
           exchangedItems[floorIndex][offerIndex]++;
           astralPearls -= offer.price;
         }
@@ -135,21 +139,9 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
       currentRound !== challenge.length - 1 &&
       currentMilestone === challenge[currentRound].milestones.length - 1
     ) {
-      console.log(
-        'Advancing round, current round was',
-        currentRound,
-        'current milestone was',
-        currentMilestone
-      );
       currentRound++;
       currentMilestone = 0;
     } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
-      console.log(
-        'Advancing milestone, current round is',
-        currentRound,
-        'current milestone was',
-        currentMilestone
-      );
       currentMilestone++;
     }
   }
