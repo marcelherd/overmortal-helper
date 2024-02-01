@@ -1,5 +1,119 @@
 import { Items } from '../items';
-import type { Challenge, Shop } from './types';
+import type { Challenge, Shop, ShoppingCart } from './types';
+
+export const MAX_SIMULATED_CONSTRUCTIONS = 100000;
+
+export const GOLDEN_ROOM_PITY_FREQUENCY = 10;
+export const GOLDEN_ROOM_CHANCE = 0.1;
+export const GOLDEN_ROOM_MIN_ASTRAL_PEARLS = 4;
+export const GOLDEN_ROOM_MAX_ASTRAL_PEARLS = 6;
+
+/**
+ * TODO
+ *
+ * @param cart - the offers that we want to exchange for in the event shop
+ * @param initialAstralPearls - the number of Astral Pearls that we already have by buying them from the event shop
+ * @returns TODO
+ */
+export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralPearls?: number) {
+  const exchangedItems = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+
+  let constructions = 0;
+  let astralPearls = initialAstralPearls ?? 0;
+
+  let currentRound = 0;
+  let currentMilestone = 0;
+
+  let finishedLastMilestone = false;
+
+  while (constructions < MAX_SIMULATED_CONSTRUCTIONS) {
+    // If we exchanged for all desired offers, we know the required number of constructions to purchase everything
+    if (JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
+      // TODO: adjust return type
+      return {
+        constructions,
+      };
+    }
+
+    // TODO: keep track of ALL received rewards
+
+    // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
+    // Technically there is an additional chance of 10% for each construction to create a golden room, but we ignore that as we care about the worst case only
+    if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
+      astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
+    }
+
+    constructions++;
+
+    // Check if we finished a milestone
+    const milestoneToCheck = challenge[currentRound].milestones[currentMilestone];
+    const { requirement, rewards } = milestoneToCheck;
+
+    if (constructions >= requirement && !finishedLastMilestone) {
+      // Check if we were awarded Astral Pearls for finishing the milestone and if so, add it to our total
+      const rewardedAstralPearls = rewards.find((reward) => reward.item === Items.AstralPearl);
+      if (rewardedAstralPearls) {
+        astralPearls += rewardedAstralPearls.quantity;
+      }
+
+      // If we just finished the last milestone of the current round, we should receive rewards for that round
+      if (currentMilestone === challenge[currentRound].milestones.length - 1) {
+        const { rewards: roundRewards } = challenge[currentRound];
+
+        // Check if we were awarded Astral Pearls for finishing the round and if so, add it to our total
+        const rewardedAstralPearlsFromRound = roundRewards.find(
+          (reward) => reward.item === Items.AstralPearl
+        );
+
+        if (rewardedAstralPearlsFromRound) {
+          astralPearls += rewardedAstralPearlsFromRound.quantity;
+        }
+
+        // If we received rewards for the last milestone of the last round, we should no longer receive any rewards from milestones
+        if (currentRound !== challenge.length - 1) {
+          finishedLastMilestone = true;
+        }
+      }
+    }
+
+    // Attempt to buy as many offers as possible with the acquired currency
+    for (let floorIndex = 0; floorIndex < shop.length; floorIndex++) {
+      const floor = shop[floorIndex];
+
+      for (let offerIndex = 0; offerIndex < floor.offers.length; offerIndex++) {
+        const offer = floor.offers[offerIndex];
+
+        // Can we buy something?
+        if (
+          exchangedItems[floorIndex][offerIndex] < cart[floorIndex][offerIndex] &&
+          astralPearls >= offer.price
+        ) {
+          exchangedItems[floorIndex][offerIndex]++;
+          astralPearls -= offer.price;
+        }
+      }
+    }
+
+    // If we finished the last milestone of the round, we can move on to the next round and reset the milestone index
+    if (
+      currentRound !== challenge.length - 1 &&
+      currentMilestone === challenge[currentRound].milestones.length - 1
+    ) {
+      currentRound++;
+      currentMilestone = 0;
+    } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
+      currentMilestone++;
+    }
+  }
+
+  throw new Error(`Hit ${MAX_SIMULATED_CONSTRUCTIONS}, stopping simulation. Purchase impossible.`);
+}
 
 export const challenge: Challenge = [
   /** Round 1 */
