@@ -35,6 +35,7 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
   while (constructions < MAX_SIMULATED_CONSTRUCTIONS) {
     // If we exchanged for all desired offers, we know the required number of constructions to purchase everything
     if (JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
+      console.log('All offers exchanged');
       // TODO: adjust return type
       return {
         constructions,
@@ -46,6 +47,7 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
     // Technically there is an additional chance of 10% for each construction to create a golden room, but we ignore that as we care about the worst case only
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
+      console.log('Golden room', constructions);
       astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
     }
 
@@ -56,9 +58,16 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
     const { requirement, rewards } = milestoneToCheck;
 
     if (constructions >= requirement && !finishedLastMilestone) {
+      console.log('Finished milestone', currentMilestone, 'of round', currentRound);
       // Check if we were awarded Astral Pearls for finishing the milestone and if so, add it to our total
       const rewardedAstralPearls = rewards.find((reward) => reward.item === Items.AstralPearl);
       if (rewardedAstralPearls) {
+        console.log(
+          'Awarding Astral Pearls for finishing the milestone',
+          rewardedAstralPearls.quantity,
+          'total is now',
+          astralPearls
+        );
         astralPearls += rewardedAstralPearls.quantity;
       }
 
@@ -72,11 +81,23 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
         );
 
         if (rewardedAstralPearlsFromRound) {
+          console.log(
+            'Awarding Astral Pearls for finishing the round',
+            rewardedAstralPearlsFromRound.quantity,
+            'total is now',
+            astralPearls
+          );
           astralPearls += rewardedAstralPearlsFromRound.quantity;
         }
 
         // If we received rewards for the last milestone of the last round, we should no longer receive any rewards from milestones
-        if (currentRound !== challenge.length - 1) {
+        if (currentRound === challenge.length - 1) {
+          console.log(
+            'Finished last round, current milestone',
+            currentMilestone,
+            'current round',
+            currentRound
+          );
           finishedLastMilestone = true;
         }
       }
@@ -94,6 +115,15 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
           exchangedItems[floorIndex][offerIndex] < cart[floorIndex][offerIndex] &&
           astralPearls >= offer.price
         ) {
+          console.log(
+            'Exchanging for offer',
+            floorIndex,
+            offerIndex,
+            'for',
+            offer.price,
+            'Astral Pearls'
+          );
+          console.log('Astral Pearls before', astralPearls, 'after', astralPearls - offer.price);
           exchangedItems[floorIndex][offerIndex]++;
           astralPearls -= offer.price;
         }
@@ -105,9 +135,21 @@ export function simulateRequiredConstructions(cart: ShoppingCart, initialAstralP
       currentRound !== challenge.length - 1 &&
       currentMilestone === challenge[currentRound].milestones.length - 1
     ) {
+      console.log(
+        'Advancing round, current round was',
+        currentRound,
+        'current milestone was',
+        currentMilestone
+      );
       currentRound++;
       currentMilestone = 0;
     } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
+      console.log(
+        'Advancing milestone, current round is',
+        currentRound,
+        'current milestone was',
+        currentMilestone
+      );
       currentMilestone++;
     }
   }

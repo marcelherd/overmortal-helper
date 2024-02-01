@@ -12,7 +12,7 @@ describe('modules/overmoratal/events/calculator', () => {
         [1, 0, 0],
         [0, 0, 1],
         [1, 0, 0],
-        [0, 0, 1],
+        [0, 0, 2],
       ];
 
       const results = simulateRequiredConstructions(cart);
