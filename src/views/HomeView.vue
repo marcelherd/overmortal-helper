@@ -4,7 +4,7 @@ import Button from 'primevue/button';
 
 <template>
   <main>
-    <p>Built by Xiaoxiao from Sanctum of Terraindom s34.</p>
+    <p>Built by Xiaoxiao from Ouroboros of Terraindom s66.</p>
     <a href="https://discord.gg/nbhE9vjdb8"
       ><Button label="Join Sanctum Discord" icon="pi pi-discord" size="small"
     /></a>
