@@ -63,7 +63,7 @@ const onClickRunSimulation = () => {
       <div class="settings__inputs">
         <div>
           <label for="initialAstralPearls">Startiung Astral Pearls from event shop:</label>
-          <input id="initialAstralPearls" type="text" v-model="initialAstralPearls" />
+          <input id="initialAstralPearls" type="number" v-model="initialAstralPearls" />
         </div>
         <div>
           <label for="minimumFloorToSimulate">Minimum floors to simulate:</label>
