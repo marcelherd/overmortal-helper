@@ -6,6 +6,7 @@ export const MAX_SIMULATED_CONSTRUCTIONS = 100000;
 
 export const GOLDEN_ROOM_PITY_FREQUENCY = 10;
 export const GOLDEN_ROOM_CHANCE = 0.1;
+export const GOLDEN_ROOM_CHANCE_NASHU = GOLDEN_ROOM_CHANCE * 0.75;
 export const GOLDEN_ROOM_MIN_ASTRAL_PEARLS = 4;
 export const GOLDEN_ROOM_MAX_ASTRAL_PEARLS = 6;
 
@@ -72,7 +73,6 @@ export function simulateRequiredConstructions(
   const rewardedItems: Partial<Record<Item, number>> = {};
 
   // Rewards from golden rooms are random, therefore we keep track of them separately
-  // TODO: Keep track of golden room rewards
   let goldenRoomsConstructed = 0;
   const rewardedItemsFromGoldenRooms: Partial<Record<Item, number>> = {};
 
@@ -96,7 +96,6 @@ export function simulateRequiredConstructions(
     // We only keep track of these if a golden room actually occured
     const goldenRoomRewards = getGoldenRoomRewards();
 
-    // TODO: Keep track of golden room rewards
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
       goldenRoomsConstructed++;
@@ -111,6 +110,10 @@ export function simulateRequiredConstructions(
         case SimulationScenarios.WorstCase:
           astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
           break;
+        case SimulationScenarios.Nashu:
+          // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
+          astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 2 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 3;
+          break;
         case SimulationScenarios.Average:
           astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
           break;
@@ -123,8 +126,21 @@ export function simulateRequiredConstructions(
       // We only consider this chance if we are not in the worst case scenario
       const goldenRoomOccured = Math.random() < GOLDEN_ROOM_CHANCE;
 
+      // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
+      const goldenRoomOccuredNashu = Math.random() < GOLDEN_ROOM_CHANCE_NASHU;
+
       if (simulationScenario === SimulationScenarios.Average && goldenRoomOccured) {
         astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
+        goldenRoomsConstructed++;
+
+        // Keep track of all golden room rewards
+        for (const reward of goldenRoomRewards) {
+          rewardedItemsFromGoldenRooms[reward.item] =
+            (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+        }
+      } else if (simulationScenario === SimulationScenarios.Nashu && goldenRoomOccuredNashu) {
+        // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
+        astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 2 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 3;
         goldenRoomsConstructed++;
 
         // Keep track of all golden room rewards
