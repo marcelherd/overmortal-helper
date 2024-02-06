@@ -20,6 +20,23 @@ export type StarscraperSimulationOptions = {
   minimumFloors?: number;
 };
 
+export type StarscraperSimulationResults = {
+  /** The number of constructions required to purchase everything from the shop */
+  constructions: number;
+
+  /** The amount of Living Earth that the player obtained through the event */
+  acquiredLivingEarth: number;
+
+  /** The rewards that the player obtained through finishing round and milestones (guaranteed) */
+  guaranteedRewards: Partial<Record<Item, number>>;
+
+  /** How many golden rooms were constructed */
+  goldenRoomsConstructed: number;
+
+  /** The rewards that the player obtained through golden rooms */
+  goldenRoomRewards: Partial<Record<Item, number>>;
+};
+
 /**
  * TODO
  *
@@ -30,7 +47,7 @@ export type StarscraperSimulationOptions = {
 export function simulateRequiredConstructions(
   cart: ShoppingCart,
   options?: StarscraperSimulationOptions
-) {
+): StarscraperSimulationResults {
   const initialAstralPearls = options?.initialAstralPearls ?? 0;
   const simulationScenario = options?.simulationScenario ?? SimulationScenarios.Average;
   const minimumFloors = options?.minimumFloors ?? 0;
@@ -55,6 +72,8 @@ export function simulateRequiredConstructions(
   const rewardedItems: Partial<Record<Item, number>> = {};
 
   // Rewards from golden rooms are random, therefore we keep track of them separately
+  // TODO: Keep track of golden room rewards
+  let goldenRoomsConstructed = 0;
   const goldenRoomRewards: Partial<Record<Item, number>> = {};
 
   let currentRound = 0;
@@ -69,12 +88,16 @@ export function simulateRequiredConstructions(
         constructions,
         acquiredLivingEarth,
         guaranteedRewards: rewardedItems,
+        goldenRoomRewards,
+        goldenRoomsConstructed,
       };
     }
 
     // TODO: Keep track of golden room rewards
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
+      goldenRoomsConstructed++;
+
       switch (simulationScenario) {
         case SimulationScenarios.WorstCase:
           astralPearls += GOLDEN_ROOM_MIN_ASTRAL_PEARLS;
@@ -93,8 +116,10 @@ export function simulateRequiredConstructions(
 
       if (simulationScenario === SimulationScenarios.Average && goldenRoomOccured) {
         astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
+        goldenRoomsConstructed++;
       } else if (simulationScenario === SimulationScenarios.BestCase) {
         astralPearls += GOLDEN_ROOM_MAX_ASTRAL_PEARLS;
+        goldenRoomsConstructed++;
       }
     }
 
@@ -886,7 +911,7 @@ export const shop: Shop = [
       },
       {
         item: Items.TechniquePoints,
-        limit: 999, // TODO: fix
+        limit: 3,
         quantity: 500,
         price: 50,
       },
@@ -907,7 +932,7 @@ export const shop: Shop = [
     offers: [
       {
         item: Items.PetStone,
-        limit: 1, // TODO: check
+        limit: 1,
         quantity: 20,
         price: 80,
       },
