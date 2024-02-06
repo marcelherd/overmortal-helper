@@ -1,6 +1,6 @@
 import { Items, type Item } from '../items';
 import { SimulationScenarios, type SimulationScenario } from '../simulation';
-import type { Challenge, Shop, ShoppingCart } from './types';
+import type { Challenge, Reward, Shop, ShoppingCart } from './types';
 
 export const MAX_SIMULATED_CONSTRUCTIONS = 100000;
 
@@ -74,7 +74,7 @@ export function simulateRequiredConstructions(
   // Rewards from golden rooms are random, therefore we keep track of them separately
   // TODO: Keep track of golden room rewards
   let goldenRoomsConstructed = 0;
-  const goldenRoomRewards: Partial<Record<Item, number>> = {};
+  const rewardedItemsFromGoldenRooms: Partial<Record<Item, number>> = {};
 
   let currentRound = 0;
   let currentMilestone = 0;
@@ -88,15 +88,24 @@ export function simulateRequiredConstructions(
         constructions,
         acquiredLivingEarth,
         guaranteedRewards: rewardedItems,
-        goldenRoomRewards,
+        goldenRoomRewards: rewardedItemsFromGoldenRooms,
         goldenRoomsConstructed,
       };
     }
+
+    // We only keep track of these if a golden room actually occured
+    const goldenRoomRewards = getGoldenRoomRewards();
 
     // TODO: Keep track of golden room rewards
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
       goldenRoomsConstructed++;
+
+      // Keep track of all golden room rewards
+      for (const reward of goldenRoomRewards) {
+        rewardedItemsFromGoldenRooms[reward.item] =
+          (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+      }
 
       switch (simulationScenario) {
         case SimulationScenarios.WorstCase:
@@ -117,9 +126,21 @@ export function simulateRequiredConstructions(
       if (simulationScenario === SimulationScenarios.Average && goldenRoomOccured) {
         astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
         goldenRoomsConstructed++;
+
+        // Keep track of all golden room rewards
+        for (const reward of goldenRoomRewards) {
+          rewardedItemsFromGoldenRooms[reward.item] =
+            (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+        }
       } else if (simulationScenario === SimulationScenarios.BestCase) {
         astralPearls += GOLDEN_ROOM_MAX_ASTRAL_PEARLS;
         goldenRoomsConstructed++;
+
+        // Keep track of all golden room rewards
+        for (const reward of goldenRoomRewards) {
+          rewardedItemsFromGoldenRooms[reward.item] =
+            (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+        }
       }
     }
 
@@ -204,6 +225,46 @@ export function simulateRequiredConstructions(
   }
 
   throw new Error(`Hit ${MAX_SIMULATED_CONSTRUCTIONS}, stopping simulation. Purchase impossible.`);
+}
+
+function getGoldenRoomRewards(): [Reward, Reward] {
+  const random = Math.random();
+
+  let randomReward: Reward = {
+    item: Items.EtherealJade,
+    quantity: 100,
+  };
+
+  if (random < 0.1863) {
+    randomReward = {
+      item: Items.CosmicJadeslip,
+      quantity: 5,
+    };
+  } else if (random < 0.3726) {
+    randomReward = {
+      item: Items.TechniqueGuide,
+      quantity: 1,
+    };
+  } else if (random < 0.4968) {
+    randomReward = {
+      item: Items.Fateum,
+      quantity: 50,
+    };
+  } else if (random < 0.503) {
+    randomReward = {
+      item: Items.CosmicJadeslip,
+      quantity: 100,
+    };
+  } else if (random < 0.8757) {
+    randomReward = {
+      item: Items.TechniquePoints,
+      quantity: 100,
+    };
+  }
+
+  // Technically golden rooms also award astral pearls, but we do not consider them here as they are
+  // only relevant for the simulation and will expire when the event ends
+  return [{ item: Items.AncientJadeslip, quantity: 5 }, randomReward];
 }
 
 export const challenge: Challenge = [

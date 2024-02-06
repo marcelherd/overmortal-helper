@@ -40,6 +40,8 @@ export const Items = {
   SpiritlandToken: 'SpiritlandToken',
   AdvancementKnowledge: 'AdvancementKnowledge',
   MythicStardust: 'MythicStardust',
+  Fateum: 'Fateum',
+  EtherealJade: 'EtherealJade',
 } as const;
 
 export type Item = keyof typeof Items;
