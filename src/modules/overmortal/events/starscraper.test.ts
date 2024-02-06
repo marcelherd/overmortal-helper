@@ -4,9 +4,9 @@ import type { ShoppingCart } from './types';
 import { simulateRequiredConstructions } from './starscraper';
 import { Events } from './events';
 
-describe('modules/overmoratal/events/calculator', () => {
-  describe('calculateRequiredItems', () => {
-    it('should calculate the required amount of event items', () => {
+describe('modules/overmoratal/events/starscraper', () => {
+  describe('simulateRequiredConstructions', () => {
+    it('should calculate the required amount of constructions', () => {
       const cart: ShoppingCart = [
         [1, 0, 0],
         [1, 0, 0],
@@ -15,24 +15,36 @@ describe('modules/overmoratal/events/calculator', () => {
         [0, 0, 2],
       ];
 
-      const { constructions: bestCase } = simulateRequiredConstructions(cart, {
+      const {
+        constructions: bestCase,
+        acquiredLivingEarth,
+        guaranteedRewards,
+      } = simulateRequiredConstructions(cart, {
         simulationScenario: 'BestCase',
+        initialAstralPearls: 1375,
+        minimumFloors: 800,
       });
+      console.log('acquiredLivingEarth', acquiredLivingEarth);
+      console.log('guaranteedRewards', guaranteedRewards);
       const { constructions: WorstCase } = simulateRequiredConstructions(cart, {
         simulationScenario: 'WorstCase',
+        initialAstralPearls: 1375,
+        minimumFloors: 800,
       });
 
       let averageSum = 0;
 
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 1000; i++) {
         const { constructions } = simulateRequiredConstructions(cart, {
           simulationScenario: 'Average',
+          initialAstralPearls: 1375,
+          minimumFloors: 800,
         });
 
         averageSum += constructions;
       }
 
-      const average = averageSum / 100;
+      const average = averageSum / 1000;
 
       console.log('bestCase', bestCase);
       console.log('WorstCase', WorstCase);

@@ -1,4 +1,4 @@
-import { Items } from '../items';
+import { Items, type Item } from '../items';
 import { SimulationScenarios, type SimulationScenario } from '../simulation';
 import type { Challenge, Shop, ShoppingCart } from './types';
 
@@ -15,6 +15,9 @@ export type StarscraperSimulationOptions = {
 
   /** Affects the chance of golden rooms occuring as well as the amount of currency obtained through them */
   simulationScenario?: SimulationScenario;
+
+  /** Minimum floors to construct before the simulation exists */
+  minimumFloors?: number;
 };
 
 /**
@@ -30,6 +33,7 @@ export function simulateRequiredConstructions(
 ) {
   const initialAstralPearls = options?.initialAstralPearls ?? 0;
   const simulationScenario = options?.simulationScenario ?? SimulationScenarios.Average;
+  const minimumFloors = options?.minimumFloors ?? 0;
 
   const exchangedItems = [
     [0, 0, 0],
@@ -42,6 +46,17 @@ export function simulateRequiredConstructions(
   let constructions = 0;
   let astralPearls = initialAstralPearls;
 
+  // We keep track of how much additional living earth we obtained through the event, so that we can deduce
+  // how much living earth the player needs to save up for in order to achieve the required amount of constructions
+  // to purchase everything from the shop
+  let acquiredLivingEarth = 0;
+
+  // Additionally we also keep track of all rewards that the player received through the event just to show it later
+  const rewardedItems: Partial<Record<Item, number>> = {};
+
+  // Rewards from golden rooms are random, therefore we keep track of them separately
+  const goldenRoomRewards: Partial<Record<Item, number>> = {};
+
   let currentRound = 0;
   let currentMilestone = 0;
 
@@ -49,15 +64,15 @@ export function simulateRequiredConstructions(
 
   while (constructions < MAX_SIMULATED_CONSTRUCTIONS) {
     // If we exchanged for all desired offers, we know the required number of constructions to purchase everything
-    if (JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
-      // TODO: adjust return type
+    if (constructions >= minimumFloors && JSON.stringify(exchangedItems) === JSON.stringify(cart)) {
       return {
         constructions,
+        acquiredLivingEarth,
+        guaranteedRewards: rewardedItems,
       };
     }
 
-    // TODO: keep track of ALL received rewards
-
+    // TODO: Keep track of golden room rewards
     // Every ten constructions guarantees a golden room which contains between four and six Astral Pearls as well as additional rewards
     if (constructions % GOLDEN_ROOM_PITY_FREQUENCY === 0) {
       switch (simulationScenario) {
@@ -90,17 +105,34 @@ export function simulateRequiredConstructions(
     const { requirement, rewards } = milestoneToCheck;
 
     if (constructions >= requirement && !finishedLastMilestone) {
+      // Keep track of all milestone rewards
+      for (const reward of rewards) {
+        rewardedItems[reward.item] = (rewardedItems[reward.item] ?? 0) + reward.quantity;
+      }
+
       // Check if we were awarded Astral Pearls for finishing the milestone and if so, add it to our total
       const rewardedAstralPearls = rewards.find((reward) => reward.item === Items.AstralPearl);
       if (rewardedAstralPearls) {
         astralPearls += rewardedAstralPearls.quantity;
       }
 
+      // Check if we were awarded Living Earth for finishing the milestone and if so, add it to our total
+      const rewardedLivingEarth = rewards.find((reward) => reward.item === Items.LivingEarth);
+      if (rewardedLivingEarth) {
+        acquiredLivingEarth += rewardedLivingEarth.quantity;
+      }
+
       // If we just finished the last milestone of the current round, we should receive rewards for that round
       if (currentMilestone === challenge[currentRound].milestones.length - 1) {
         const { rewards: roundRewards } = challenge[currentRound];
 
+        // Keep track of all round rewards
+        for (const reward of roundRewards) {
+          rewardedItems[reward.item] = (rewardedItems[reward.item] ?? 0) + reward.quantity;
+        }
+
         // Check if we were awarded Astral Pearls for finishing the round and if so, add it to our total
+        // We don't have to check for Living Earth, as the round rewards never contain Living Earth
         const rewardedAstralPearlsFromRound = roundRewards.find(
           (reward) => reward.item === Items.AstralPearl
         );
@@ -113,6 +145,17 @@ export function simulateRequiredConstructions(
         if (currentRound === challenge.length - 1) {
           finishedLastMilestone = true;
         }
+      }
+
+      // If we finished the last milestone of the round, we can move on to the next round and reset the milestone index
+      if (
+        currentRound !== challenge.length - 1 &&
+        currentMilestone === challenge[currentRound].milestones.length - 1
+      ) {
+        currentRound++;
+        currentMilestone = 0;
+      } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
+        currentMilestone++;
       }
     }
 
@@ -132,17 +175,6 @@ export function simulateRequiredConstructions(
           astralPearls -= offer.price;
         }
       }
-    }
-
-    // If we finished the last milestone of the round, we can move on to the next round and reset the milestone index
-    if (
-      currentRound !== challenge.length - 1 &&
-      currentMilestone === challenge[currentRound].milestones.length - 1
-    ) {
-      currentRound++;
-      currentMilestone = 0;
-    } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
-      currentMilestone++;
     }
   }
 
