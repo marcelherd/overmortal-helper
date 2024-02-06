@@ -1,5 +1,6 @@
 export const SimulationScenarios = {
   WorstCase: 'WorstCase',
+  Lone: 'Lone',
   Nashu: 'Nashu',
   Average: 'Average',
   BestCase: 'BestCase',

@@ -5,8 +5,9 @@ import type { Challenge, Reward, Shop, ShoppingCart } from './types';
 export const MAX_SIMULATED_CONSTRUCTIONS = 100000;
 
 export const GOLDEN_ROOM_PITY_FREQUENCY = 10;
-export const GOLDEN_ROOM_CHANCE = 0.1;
+export const GOLDEN_ROOM_CHANCE = 0.05;
 export const GOLDEN_ROOM_CHANCE_NASHU = GOLDEN_ROOM_CHANCE * 0.75;
+export const GOLDEN_ROOM_CHANCE_LONE = GOLDEN_ROOM_CHANCE * 0.5;
 export const GOLDEN_ROOM_MIN_ASTRAL_PEARLS = 4;
 export const GOLDEN_ROOM_MAX_ASTRAL_PEARLS = 6;
 
@@ -114,6 +115,10 @@ export function simulateRequiredConstructions(
           // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
           astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 2 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 3;
           break;
+        case SimulationScenarios.Lone:
+          // Lone is even unluckier than Nashu
+          astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 3 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 4;
+          break;
         case SimulationScenarios.Average:
           astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
           break;
@@ -129,6 +134,9 @@ export function simulateRequiredConstructions(
       // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
       const goldenRoomOccuredNashu = Math.random() < GOLDEN_ROOM_CHANCE_NASHU;
 
+      // Lone is even unluckier
+      const goldenRoomOccuredLone = Math.random() < GOLDEN_ROOM_CHANCE_LONE;
+
       if (simulationScenario === SimulationScenarios.Average && goldenRoomOccured) {
         astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 2;
         goldenRoomsConstructed++;
@@ -141,6 +149,16 @@ export function simulateRequiredConstructions(
       } else if (simulationScenario === SimulationScenarios.Nashu && goldenRoomOccuredNashu) {
         // Nashu is a bit unlucky so we're assuming an amount that is slightly below average
         astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 2 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 3;
+        goldenRoomsConstructed++;
+
+        // Keep track of all golden room rewards
+        for (const reward of goldenRoomRewards) {
+          rewardedItemsFromGoldenRooms[reward.item] =
+            (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+        }
+      } else if (simulationScenario === SimulationScenarios.Lone && goldenRoomOccuredLone) {
+        // Lone is even unluckier than Nashu
+        astralPearls += (GOLDEN_ROOM_MAX_ASTRAL_PEARLS + 3 * GOLDEN_ROOM_MIN_ASTRAL_PEARLS) / 4;
         goldenRoomsConstructed++;
 
         // Keep track of all golden room rewards
