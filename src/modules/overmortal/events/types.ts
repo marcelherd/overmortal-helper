@@ -4,7 +4,7 @@ import type { Offer } from '../items';
 export type Challenge = [Round, Round, Round, Round, Round];
 
 export type Round = {
-  rewards: [Reward, Reward, Reward];
+  rewards: Reward[];
   milestones: Milestone[];
 };
 

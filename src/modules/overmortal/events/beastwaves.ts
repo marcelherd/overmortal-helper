@@ -1,142 +1,144 @@
 import { Items } from '../items';
 import type { Challenge, Shop } from './types';
 
-// TODO: fix entire file
-
 export const challenge: Challenge = [
   /** Round 1 */
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 5,
+        item: Items.Alioth,
+        quantity: 2,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 1000,
+        item: Items.MonsterRelicSpiritChest,
+        quantity: 25,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 40,
+        item: Items.MonsterGearSpiritChest,
+        quantity: 25,
+      },
+      {
+        item: Items.WhiteTigerSwordShard,
+        quantity: 80,
       },
     ],
     milestones: [
       {
-        requirement: 5,
+        requirement: 1,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 1,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 200,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.Thunderite,
             quantity: 3,
           },
-        ],
-      },
-      {
-        requirement: 10,
-        rewards: [
           {
-            item: Items.LivingEarth,
+            item: Items.MonsterSoul,
+            quantity: 5,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 2,
           },
+        ],
+      },
+      {
+        requirement: 4,
+        rewards: [
           {
-            item: Items.TechniquePoints,
-            quantity: 200,
+            item: Items.Thunderite,
+            quantity: 3,
           },
           {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 5,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 2,
           },
         ],
       },
       {
-        requirement: 20,
+        requirement: 9,
         rewards: [
           {
-            item: Items.LivingEarth,
+            item: Items.Thunderite,
             quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 300,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 5,
-          },
-        ],
-      },
-      {
-        requirement: 30,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 3,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 300,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 5,
-          },
-        ],
-      },
-      {
-        requirement: 50,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 3,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 400,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 10,
           },
+          {
+            item: Items.Ploughwood,
+            quantity: 2,
+          },
         ],
       },
       {
-        requirement: 70,
+        requirement: 16,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 3,
+            item: Items.Thunderite,
+            quantity: 6,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 400,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 10,
           },
+          {
+            item: Items.Ploughwood,
+            quantity: 3,
+          },
         ],
       },
       {
-        requirement: 100,
+        requirement: 26,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 3,
+            item: Items.Thunderite,
+            quantity: 6,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 400,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 15,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 3,
+          },
+        ],
+      },
+      {
+        requirement: 41,
+        rewards: [
+          {
+            item: Items.Thunderite,
+            quantity: 6,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 15,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 3,
+          },
+        ],
+      },
+      {
+        requirement: 61,
+        rewards: [
+          {
+            item: Items.Thunderite,
+            quantity: 9,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 20,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 4,
           },
         ],
       },
@@ -146,135 +148,139 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 10,
+        item: Items.Alioth,
+        quantity: 3,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 1500,
-      },
-      {
-        item: Items.AstralPearl,
+        item: Items.MonsterRelicSpiritChest,
         quantity: 60,
+      },
+      {
+        item: Items.MonsterGearSpiritChest,
+        quantity: 60,
+      },
+      {
+        item: Items.WhiteTigerSwordShard,
+        quantity: 120,
       },
     ],
     milestones: [
       {
-        requirement: 120,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 500,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 10,
-          },
-        ],
-      },
-      {
-        requirement: 140,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 500,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 10,
-          },
-        ],
-      },
-      {
-        requirement: 170,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 15,
-          },
-        ],
-      },
-      {
-        requirement: 200,
+        requirement: 86,
         rewards: [
           {
             item: Items.Thunderite,
-            quantity: 5,
+            quantity: 9,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 15,
-          },
-        ],
-      },
-      {
-        requirement: 240,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 700,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 20,
           },
+          {
+            item: Items.Ploughwood,
+            quantity: 4,
+          },
         ],
       },
       {
-        requirement: 280,
+        requirement: 116,
         rewards: [
           {
             item: Items.Thunderite,
-            quantity: 5,
+            quantity: 9,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 700,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 20,
           },
+          {
+            item: Items.Ploughwood,
+            quantity: 4,
+          },
         ],
       },
       {
-        requirement: 330,
+        requirement: 146,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 5,
+            item: Items.TreasureLantern,
+            quantity: 1,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 800,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 25,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 5,
+          },
+        ],
+      },
+      {
+        requirement: 176,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 1,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 25,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 5,
+          },
+        ],
+      },
+      {
+        requirement: 206,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 1,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 25,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 5,
+          },
+        ],
+      },
+      {
+        requirement: 236,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 1,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 30,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 6,
+          },
+        ],
+      },
+      {
+        requirement: 276,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 30,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 6,
           },
         ],
       },
@@ -284,135 +290,139 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 15,
+        item: Items.Alioth,
+        quantity: 4,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 2000,
+        item: Items.SpecialR3RuneChest,
+        quantity: 1,
       },
       {
-        item: Items.AstralPearl,
+        item: Items.R3RuneSelectionChest,
         quantity: 80,
+      },
+      {
+        item: Items.BladesCastSelection,
+        quantity: 60,
       },
     ],
     milestones: [
       {
-        requirement: 370,
+        requirement: 316,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 7,
+            item: Items.TreasureLantern,
+            quantity: 2,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 900,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 20,
-          },
-        ],
-      },
-      {
-        requirement: 410,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 900,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 20,
-          },
-        ],
-      },
-      {
-        requirement: 460,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1000,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 25,
-          },
-        ],
-      },
-      {
-        requirement: 510,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1000,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 25,
-          },
-        ],
-      },
-      {
-        requirement: 570,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1100,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.MonsterSoul,
             quantity: 30,
           },
-        ],
-      },
-      {
-        requirement: 630,
-        rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1100,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 6,
           },
         ],
       },
       {
-        requirement: 700,
+        requirement: 356,
         rewards: [
           {
-            item: Items.Thunderite,
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 35,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 7,
           },
+        ],
+      },
+      {
+        requirement: 396,
+        rewards: [
           {
-            item: Items.TechniquePoints,
-            quantity: 1200,
+            item: Items.TreasureLantern,
+            quantity: 2,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.MonsterSoul,
+            quantity: 35,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 7,
+          },
+        ],
+      },
+      {
+        requirement: 436,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 35,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 7,
+          },
+        ],
+      },
+      {
+        requirement: 476,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 40,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 8,
+          },
+        ],
+      },
+      {
+        requirement: 516,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 40,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 8,
+          },
+        ],
+      },
+      {
+        requirement: 566,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 40,
+          },
+          {
+            item: Items.Ploughwood,
+            quantity: 8,
           },
         ],
       },
@@ -422,135 +432,139 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.CreationJade,
+        item: Items.Alioth,
         quantity: 5,
       },
       {
-        item: Items.TechniqueGuide,
-        quantity: 20,
+        item: Items.SpecialR3RuneChest,
+        quantity: 2,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 100,
+        item: Items.R3RuneSelectionChest,
+        quantity: 4,
+      },
+      {
+        item: Items.BladesCastSelection,
+        quantity: 60,
       },
     ],
     milestones: [
       {
-        requirement: 760,
+        requirement: 616,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1200,
+            item: Items.MonsterSoul,
+            quantity: 50,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 9,
           },
         ],
       },
       {
-        requirement: 820,
+        requirement: 666,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1200,
+            item: Items.MonsterSoul,
+            quantity: 50,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 9,
           },
         ],
       },
       {
-        requirement: 890,
+        requirement: 716,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1300,
+            item: Items.MonsterSoul,
+            quantity: 50,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 9,
           },
         ],
       },
       {
-        requirement: 960,
+        requirement: 766,
         rewards: [
           {
-            item: Items.Thunderite,
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 50,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 10,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1300,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
           },
         ],
       },
       {
-        requirement: 1040,
+        requirement: 816,
         rewards: [
           {
-            item: Items.Thunderite,
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 50,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 10,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1400,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
           },
         ],
       },
       {
-        requirement: 1120,
+        requirement: 866,
         rewards: [
           {
-            item: Items.Thunderite,
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 50,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 10,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1500,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
           },
         ],
       },
       {
-        requirement: 1200,
+        requirement: 916,
         rewards: [
           {
-            item: Items.Thunderite,
+            item: Items.TreasureLantern,
+            quantity: 4,
+          },
+          {
+            item: Items.MonsterSoul,
+            quantity: 60,
+          },
+          {
+            item: Items.Ploughwood,
             quantity: 10,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
           },
         ],
       },
@@ -560,135 +574,139 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.CreationJade,
-        quantity: 5,
+        item: Items.Alioth,
+        quantity: 6,
       },
       {
-        item: Items.TechniqueGuide,
-        quantity: 25,
+        item: Items.SpecialR3RuneChest,
+        quantity: 3,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 120,
+        item: Items.R3RuneSelectionChest,
+        quantity: 6,
+      },
+      {
+        item: Items.BladesCastSelection,
+        quantity: 60,
       },
     ],
     milestones: [
       {
-        requirement: 1280,
+        requirement: 966,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1600,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1360,
+        requirement: 1016,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1600,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1450,
+        requirement: 1066,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1700,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1540,
+        requirement: 1116,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1700,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1640,
+        requirement: 1166,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1800,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1740,
+        requirement: 1216,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 4,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1900,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
       {
-        requirement: 1830,
+        requirement: 1266,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.TreasureLantern,
+            quantity: 5,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 2000,
+            item: Items.MonsterSoul,
+            quantity: 60,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.Ploughwood,
+            quantity: 10,
           },
         ],
       },
@@ -701,15 +719,15 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Items.NimbusJadeslip,
+        item: Items.ZodiacJadeslip,
         limit: 1,
-        quantity: 50,
+        quantity: 100,
         price: 50,
       },
       {
-        item: Items.TechniquePoints,
-        limit: 999, // TODO: fix
-        quantity: 500,
+        item: Items.Souldust,
+        limit: 3,
+        quantity: 10000,
         price: 50,
       },
       {
@@ -720,7 +738,7 @@ export const shop: Shop = [
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
+      item: Items.Thunderite,
       quantity: 3,
     },
   },
@@ -728,97 +746,97 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Items.PetStone,
-        limit: 1, // TODO: check
-        quantity: 20,
-        price: 80,
+        item: Items.TechniqueGuide,
+        limit: 2,
+        quantity: 5,
+        price: 150,
       },
       {
-        item: Items.PetJadeslip,
+        item: Items.PetStone,
         limit: 1,
-        quantity: 200,
-        price: 80,
+        quantity: 35,
+        price: 150,
       },
       {
         item: Items.Alioth,
-        limit: 3,
+        limit: 2,
         quantity: 1,
         price: 100,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 5,
+      item: Items.Thunderite,
+      quantity: 6,
     },
   },
   // Floor 3
   {
     offers: [
       {
-        item: Items.StardustChestIII,
+        item: Items.NatureMantra,
         limit: 1,
-        quantity: 3,
-        price: 220,
-      },
-      {
-        item: Items.CarvingJade,
-        limit: 1,
-        quantity: 5,
-        price: 250,
-      },
-      {
-        item: Items.AncientJadeslip,
-        limit: 1,
-        quantity: 400,
+        quantity: 10,
         price: 200,
+      },
+      {
+        item: Items.R3RuneSelectionChest,
+        limit: 4,
+        quantity: 1,
+        price: 140,
+      },
+      {
+        item: Items.TechniquePoints,
+        limit: 3,
+        quantity: 1800,
+        price: 180,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 7,
+      item: Items.Thunderite,
+      quantity: 9,
     },
   },
   // Floor 4
   {
     offers: [
       {
-        item: Items.CosmicJadeslip,
-        limit: 1,
-        quantity: 200,
+        item: Items.SpecialR3RuneChest,
+        limit: 2,
+        quantity: 1,
         price: 240,
       },
       {
-        item: Items.SpiritlandToken,
-        limit: 1,
-        quantity: 20,
+        item: Items.ExoticHuntShardChest,
+        limit: 2,
+        quantity: 1,
         price: 400,
       },
       {
-        item: Items.AdvancementKnowledge,
-        limit: 1,
-        quantity: 20,
-        price: 400,
+        item: Items.SearingBladesShard,
+        limit: 3,
+        quantity: 40,
+        price: 240,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 9,
+      item: Items.Thunderite,
+      quantity: 12,
     },
   },
   // Floor 5
   {
     offers: [
       {
-        item: Items.TechniqueGuide,
+        item: Items.CreationDew,
         limit: 2,
-        quantity: 30,
-        price: 900,
+        quantity: 6,
+        price: 480,
       },
       {
-        item: Items.MythicStardust,
-        limit: 2,
-        quantity: 100,
-        price: 600,
+        item: Items.CreationJadeslip,
+        limit: 3,
+        quantity: 200,
+        price: 500,
       },
       {
         item: Items.CreationJade,
@@ -828,8 +846,8 @@ export const shop: Shop = [
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 12,
+      item: Items.Thunderite,
+      quantity: 15,
     },
   },
 ];

@@ -20,6 +20,7 @@ export const Items = {
 
   /** Miscellaneous */
   CreationJade: 'CreationJade',
+  CreationDew: 'CreationDew',
   TechniqueGuide: 'TechniqueGuide',
   TechniquePoints: 'TechniquePoints',
   Ploughwood: 'Ploughwood',
@@ -27,10 +28,15 @@ export const Items = {
   MonsterRelicSpiritChest: 'MonsterRelicSpiritChest',
   MonsterGearSpiritChest: 'MonsterGearSpiritChest',
   SpecialR3RuneChest: 'SpecialR3RuneChest',
+  R3RuneSelectionChest: 'R3RuneSelectionChest',
+  ExoticHuntShardChest: 'ExoticHuntShardChest',
   StarUpStone: 'StarUpStone',
   BerpentEgg: 'BerpentEgg',
   NimbusJadeslip: 'NimbusJadeslip',
+  ZodiacJadeslip: 'ZodiacJadeslip',
+  CreationJadeslip: 'CreationJadeslip',
   Forgestone: 'Forgestone',
+  Souldust: 'Souldust',
   PetStone: 'PetStone',
   PetJadeslip: 'PetJadeslip',
   StardustChestIII: 'StardustChestIII',
@@ -40,8 +46,12 @@ export const Items = {
   SpiritlandToken: 'SpiritlandToken',
   AdvancementKnowledge: 'AdvancementKnowledge',
   MythicStardust: 'MythicStardust',
+  NatureMantra: 'NatureMantra',
   Fateum: 'Fateum',
   EtherealJade: 'EtherealJade',
+  WhiteTigerSwordShard: 'WhiteTigerSwordShard',
+  SearingBladesShard: 'SearingBladesShard',
+  BladesCastSelection: 'BladesCastSelection',
 } as const;
 
 export type Item = keyof typeof Items;
