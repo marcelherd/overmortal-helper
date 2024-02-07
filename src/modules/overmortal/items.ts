@@ -8,7 +8,12 @@ export type Offer = {
 export const Items = {
   /** Adventure */
   TreasureLantern: 'TreasureLantern',
+
+  /** Technically there is a different Jade/Curio for each type of Adventure, but we will only be using Everfrost */
   EverfrostJade: 'EverfrostJade',
+  EverfrostCurioSelectionChest: 'EverfrostCurioSelectionChest',
+  UniversusJade: 'UniversusJade',
+  UniversusCurioSelectionChest: 'UniversusCurioSelectionChest',
 
   /** Beastwaves */
   Thunderite: 'Thunderite',
@@ -25,6 +30,7 @@ export const Items = {
   TechniquePoints: 'TechniquePoints',
   Ploughwood: 'Ploughwood',
   Alioth: 'Alioth',
+  HeavenlyWine: 'HeavenlyWine',
   MonsterRelicSpiritChest: 'MonsterRelicSpiritChest',
   MonsterGearSpiritChest: 'MonsterGearSpiritChest',
   SpecialR3RuneChest: 'SpecialR3RuneChest',
@@ -32,6 +38,7 @@ export const Items = {
   ExoticHuntShardChest: 'ExoticHuntShardChest',
   StarUpStone: 'StarUpStone',
   BerpentEgg: 'BerpentEgg',
+  SpecialPetEgg: 'SpecialPetEgg',
   NimbusJadeslip: 'NimbusJadeslip',
   ZodiacJadeslip: 'ZodiacJadeslip',
   CreationJadeslip: 'CreationJadeslip',
@@ -39,6 +46,7 @@ export const Items = {
   Souldust: 'Souldust',
   PetStone: 'PetStone',
   PetJadeslip: 'PetJadeslip',
+  StardustChestII: 'StardustChestII',
   StardustChestIII: 'StardustChestIII',
   CarvingJade: 'CarvingJade',
   AncientJadeslip: 'AncientJadeslip',

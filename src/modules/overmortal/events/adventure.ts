@@ -1,40 +1,57 @@
 import { Items } from '../items';
 import type { Challenge, Shop } from './types';
 
-// TODO: fix entire file
+// TODO: ensure that all types of adventures have the same rewards, except for the type of jade (but same quantity)
 
 export const challenge: Challenge = [
   /** Round 1 */
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 5,
+        item: Items.BerpentEgg,
+        quantity: 1,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 1000,
+        item: Items.EverfrostJade,
+        quantity: 100,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 40,
+        item: Items.StarUpStone,
+        quantity: 400,
       },
     ],
     milestones: [
       {
-        requirement: 5,
+        requirement: 2,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 1,
+            item: Items.TreasureLantern,
+            quantity: 2,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 200,
+            item: Items.EverfrostJade,
+            quantity: 10,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 3,
+            item: Items.StarUpStone,
+            quantity: 20,
+          },
+        ],
+      },
+      {
+        requirement: 6,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 10,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 25,
           },
         ],
       },
@@ -42,101 +59,67 @@ export const challenge: Challenge = [
         requirement: 10,
         rewards: [
           {
-            item: Items.LivingEarth,
+            item: Items.TreasureLantern,
             quantity: 2,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 200,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 5,
-          },
-        ],
-      },
-      {
-        requirement: 20,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 3,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 300,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 5,
-          },
-        ],
-      },
-      {
-        requirement: 30,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 3,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 300,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 5,
-          },
-        ],
-      },
-      {
-        requirement: 50,
-        rewards: [
-          {
-            item: Items.LivingEarth,
-            quantity: 3,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 400,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.EverfrostJade,
             quantity: 10,
           },
+          {
+            item: Items.StarUpStone,
+            quantity: 30,
+          },
         ],
       },
       {
-        requirement: 70,
+        requirement: 15,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 3,
+            item: Items.TreasureLantern,
+            quantity: 2,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 400,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.EverfrostJade,
             quantity: 10,
           },
+          {
+            item: Items.StarUpStone,
+            quantity: 35,
+          },
         ],
       },
       {
-        requirement: 100,
+        requirement: 25,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 3,
+            item: Items.TreasureLantern,
+            quantity: 2,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 400,
+            item: Items.EverfrostJade,
+            quantity: 10,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 15,
+            item: Items.StarUpStone,
+            quantity: 40,
+          },
+        ],
+      },
+      {
+        requirement: 40,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 2,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 10,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 45,
           },
         ],
       },
@@ -146,50 +129,84 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 10,
+        item: Items.BerpentEgg,
+        quantity: 1,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 1500,
+        item: Items.EverfrostJade,
+        quantity: 200,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 60,
+        item: Items.StarUpStone,
+        quantity: 600,
       },
     ],
     milestones: [
       {
-        requirement: 120,
+        requirement: 90,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 5,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 500,
+            item: Items.EverfrostJade,
+            quantity: 20,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 10,
+            item: Items.StarUpStone,
+            quantity: 30,
           },
         ],
       },
       {
-        requirement: 140,
+        requirement: 110,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 5,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 500,
+            item: Items.EverfrostJade,
+            quantity: 20,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 10,
+            item: Items.StarUpStone,
+            quantity: 35,
+          },
+        ],
+      },
+      {
+        requirement: 130,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 20,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 40,
+          },
+        ],
+      },
+      {
+        requirement: 150,
+        rewards: [
+          {
+            item: Items.TreasureLantern,
+            quantity: 3,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 20,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 45,
           },
         ],
       },
@@ -197,84 +214,33 @@ export const challenge: Challenge = [
         requirement: 170,
         rewards: [
           {
-            item: Items.LivingEarth,
-            quantity: 5,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 15,
-          },
-        ],
-      },
-      {
-        requirement: 200,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 15,
-          },
-        ],
-      },
-      {
-        requirement: 240,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 700,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.EverfrostJade,
             quantity: 20,
           },
+          {
+            item: Items.StarUpStone,
+            quantity: 50,
+          },
         ],
       },
       {
-        requirement: 280,
+        requirement: 190,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 5,
+            item: Items.TreasureLantern,
+            quantity: 3,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 700,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.EverfrostJade,
             quantity: 20,
           },
-        ],
-      },
-      {
-        requirement: 330,
-        rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 5,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 800,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 25,
+            item: Items.StarUpStone,
+            quantity: 55,
           },
         ],
       },
@@ -284,33 +250,101 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.TechniqueGuide,
-        quantity: 15,
+        item: Items.BerpentEgg,
+        quantity: 1,
       },
       {
-        item: Items.TechniquePoints,
-        quantity: 2000,
+        item: Items.EverfrostJade,
+        quantity: 300,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 80,
+        item: Items.StarUpStone,
+        quantity: 1000,
       },
     ],
     milestones: [
       {
-        requirement: 370,
+        requirement: 260,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 7,
+            item: Items.LivingEarth,
+            quantity: 10,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 900,
+            item: Items.EverfrostJade,
+            quantity: 30,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 20,
+            item: Items.StarUpStone,
+            quantity: 40,
+          },
+        ],
+      },
+      {
+        requirement: 290,
+        rewards: [
+          {
+            item: Items.LivingEarth,
+            quantity: 10,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 30,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 45,
+          },
+        ],
+      },
+      {
+        requirement: 320,
+        rewards: [
+          {
+            item: Items.LivingEarth,
+            quantity: 10,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 30,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 50,
+          },
+        ],
+      },
+      {
+        requirement: 350,
+        rewards: [
+          {
+            item: Items.LivingEarth,
+            quantity: 10,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 30,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 55,
+          },
+        ],
+      },
+      {
+        requirement: 380,
+        rewards: [
+          {
+            item: Items.LivingEarth,
+            quantity: 10,
+          },
+          {
+            item: Items.EverfrostJade,
+            quantity: 30,
+          },
+          {
+            item: Items.StarUpStone,
+            quantity: 60,
           },
         ],
       },
@@ -318,101 +352,16 @@ export const challenge: Challenge = [
         requirement: 410,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 7,
+            item: Items.LivingEarth,
+            quantity: 10,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 900,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 20,
-          },
-        ],
-      },
-      {
-        requirement: 460,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1000,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 25,
-          },
-        ],
-      },
-      {
-        requirement: 510,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1000,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 25,
-          },
-        ],
-      },
-      {
-        requirement: 570,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1100,
-          },
-          {
-            item: Items.AstralPearl,
+            item: Items.EverfrostJade,
             quantity: 30,
           },
-        ],
-      },
-      {
-        requirement: 630,
-        rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1100,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
-          },
-        ],
-      },
-      {
-        requirement: 700,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 7,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1200,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 65,
           },
         ],
       },
@@ -422,135 +371,118 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.CreationJade,
-        quantity: 5,
+        item: Items.BerpentEgg,
+        quantity: 1,
       },
       {
-        item: Items.TechniqueGuide,
-        quantity: 20,
+        item: Items.EverfrostJade,
+        quantity: 400,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 100,
+        item: Items.StarUpStone,
+        quantity: 2000,
       },
     ],
     milestones: [
       {
-        requirement: 760,
+        requirement: 530,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1200,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 50,
           },
         ],
       },
       {
-        requirement: 820,
+        requirement: 590,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1200,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 55,
           },
         ],
       },
       {
-        requirement: 890,
+        requirement: 650,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1300,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 60,
           },
         ],
       },
       {
-        requirement: 960,
+        requirement: 710,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1300,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 65,
           },
         ],
       },
       {
-        requirement: 1040,
+        requirement: 770,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1400,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 70,
           },
         ],
       },
       {
-        requirement: 1120,
+        requirement: 830,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 10,
+            item: Items.LivingEarth,
+            quantity: 15,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1500,
+            item: Items.EverfrostJade,
+            quantity: 40,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
-          },
-        ],
-      },
-      {
-        requirement: 1200,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 10,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 1600,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 75,
           },
         ],
       },
@@ -560,135 +492,118 @@ export const challenge: Challenge = [
   {
     rewards: [
       {
-        item: Items.CreationJade,
-        quantity: 5,
+        item: Items.BerpentEgg,
+        quantity: 2,
       },
       {
-        item: Items.TechniqueGuide,
-        quantity: 25,
+        item: Items.EverfrostJade,
+        quantity: 500,
       },
       {
-        item: Items.AstralPearl,
-        quantity: 120,
+        item: Items.StarUpStone,
+        quantity: 3000,
       },
     ],
     milestones: [
       {
-        requirement: 1280,
+        requirement: 1040,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1600,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 60,
           },
         ],
       },
       {
-        requirement: 1360,
+        requirement: 1130,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1600,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 65,
           },
         ],
       },
       {
-        requirement: 1450,
+        requirement: 1220,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1700,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 70,
           },
         ],
       },
       {
-        requirement: 1540,
+        requirement: 1310,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1700,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 75,
           },
         ],
       },
       {
-        requirement: 1640,
+        requirement: 1400,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1800,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 80,
           },
         ],
       },
       {
-        requirement: 1740,
+        requirement: 1490,
         rewards: [
           {
-            item: Items.Thunderite,
-            quantity: 15,
+            item: Items.LivingEarth,
+            quantity: 20,
           },
           {
-            item: Items.TechniquePoints,
-            quantity: 1900,
+            item: Items.EverfrostJade,
+            quantity: 90,
           },
           {
-            item: Items.AstralPearl,
-            quantity: 30,
-          },
-        ],
-      },
-      {
-        requirement: 1830,
-        rewards: [
-          {
-            item: Items.Thunderite,
-            quantity: 15,
-          },
-          {
-            item: Items.TechniquePoints,
-            quantity: 2000,
-          },
-          {
-            item: Items.AstralPearl,
-            quantity: 30,
+            item: Items.StarUpStone,
+            quantity: 85,
           },
         ],
       },
@@ -701,27 +616,27 @@ export const shop: Shop = [
   {
     offers: [
       {
-        item: Items.NimbusJadeslip,
-        limit: 1,
-        quantity: 50,
-        price: 50,
-      },
-      {
-        item: Items.TechniquePoints,
-        limit: 999, // TODO: fix
-        quantity: 500,
-        price: 50,
-      },
-      {
-        item: Items.Forgestone,
+        item: Items.Ploughwood,
         limit: 3,
-        quantity: 100,
+        quantity: 3,
+        price: 60,
+      },
+      {
+        item: Items.StardustChestII,
+        limit: 1,
+        quantity: 1,
+        price: 50,
+      },
+      {
+        item: Items.StarUpStone,
+        limit: 5,
+        quantity: 50,
         price: 50,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 3,
+      item: Items.TreasureLantern,
+      quantity: 1,
     },
   },
   // Floor 2
@@ -729,96 +644,96 @@ export const shop: Shop = [
     offers: [
       {
         item: Items.PetStone,
-        limit: 1, // TODO: check
-        quantity: 20,
-        price: 80,
+        limit: 1,
+        quantity: 40,
+        price: 160,
       },
       {
-        item: Items.PetJadeslip,
-        limit: 1,
-        quantity: 200,
-        price: 80,
+        item: Items.TechniqueGuide,
+        limit: 2,
+        quantity: 5,
+        price: 160,
       },
       {
         item: Items.Alioth,
-        limit: 3,
-        quantity: 1,
-        price: 100,
+        limit: 2,
+        quantity: 2,
+        price: 200,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 5,
+      item: Items.TreasureLantern,
+      quantity: 2,
     },
   },
   // Floor 3
   {
     offers: [
       {
+        item: Items.CarvingJade,
+        limit: 2,
+        quantity: 4,
+        price: 200,
+      },
+      {
         item: Items.StardustChestIII,
         limit: 1,
         quantity: 3,
-        price: 220,
+        price: 200,
       },
       {
-        item: Items.CarvingJade,
-        limit: 1,
-        quantity: 5,
-        price: 250,
-      },
-      {
-        item: Items.AncientJadeslip,
+        item: Items.ZodiacJadeslip,
         limit: 1,
         quantity: 400,
         price: 200,
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 7,
+      item: Items.TreasureLantern,
+      quantity: 3,
     },
   },
   // Floor 4
   {
     offers: [
       {
+        item: Items.EverfrostCurioSelectionChest,
+        limit: 2,
+        quantity: 1,
+        price: 240,
+      },
+      {
+        item: Items.HeavenlyWine,
+        limit: 1,
+        quantity: 2,
+        price: 240,
+      },
+      {
         item: Items.CosmicJadeslip,
         limit: 1,
         quantity: 200,
         price: 240,
       },
-      {
-        item: Items.SpiritlandToken,
-        limit: 1,
-        quantity: 20,
-        price: 400,
-      },
-      {
-        item: Items.AdvancementKnowledge,
-        limit: 1,
-        quantity: 20,
-        price: 400,
-      },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 9,
+      item: Items.TreasureLantern,
+      quantity: 4,
     },
   },
   // Floor 5
   {
     offers: [
       {
-        item: Items.TechniqueGuide,
+        item: Items.SpecialPetEgg,
         limit: 2,
-        quantity: 30,
-        price: 900,
+        quantity: 1,
+        price: 500,
       },
       {
-        item: Items.MythicStardust,
-        limit: 2,
-        quantity: 100,
-        price: 600,
+        item: Items.CreationJadeslip,
+        limit: 3,
+        quantity: 200,
+        price: 200,
       },
       {
         item: Items.CreationJade,
@@ -828,8 +743,8 @@ export const shop: Shop = [
       },
     ],
     exchangeBonus: {
-      item: Items.LivingEarth,
-      quantity: 12,
+      item: Items.TreasureLantern,
+      quantity: 5,
     },
   },
 ];
