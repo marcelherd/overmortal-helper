@@ -261,6 +261,76 @@ export function simulateRequiredConstructions(
   throw new Error(`Hit ${MAX_SIMULATED_CONSTRUCTIONS}, stopping simulation. Purchase impossible.`);
 }
 
+export function getGuaranteedRewardsByConstructions(targetConstructions: number) {
+  const rewardedItems: Partial<Record<Item, number>> = {};
+
+  let constructions = 0;
+
+  let currentRound = 0;
+  let currentMilestone = 0;
+
+  let finishedLastMilestone = false;
+
+  while (constructions < targetConstructions) {
+    constructions++;
+
+    // Check if we finished a milestone
+    const milestoneToCheck = challenge[currentRound].milestones[currentMilestone];
+    const { requirement, rewards } = milestoneToCheck;
+
+    if (constructions >= requirement && !finishedLastMilestone) {
+      // Keep track of all milestone rewards
+      for (const reward of rewards) {
+        rewardedItems[reward.item] = (rewardedItems[reward.item] ?? 0) + reward.quantity;
+      }
+
+      // If we just finished the last milestone of the current round, we should receive rewards for that round
+      if (currentMilestone === challenge[currentRound].milestones.length - 1) {
+        const { rewards: roundRewards } = challenge[currentRound];
+
+        // Keep track of all round rewards
+        for (const reward of roundRewards) {
+          rewardedItems[reward.item] = (rewardedItems[reward.item] ?? 0) + reward.quantity;
+        }
+
+        // If we received rewards for the last milestone of the last round, we should no longer receive any rewards from milestones
+        if (currentRound === challenge.length - 1) {
+          finishedLastMilestone = true;
+        }
+      }
+
+      // If we finished the last milestone of the round, we can move on to the next round and reset the milestone index
+      if (
+        currentRound !== challenge.length - 1 &&
+        currentMilestone === challenge[currentRound].milestones.length - 1
+      ) {
+        currentRound++;
+        currentMilestone = 0;
+      } else if (currentMilestone !== challenge[currentRound].milestones.length - 1) {
+        currentMilestone++;
+      }
+    }
+  }
+
+  return rewardedItems;
+}
+
+export function getExpectedRewardsByGoldenRooms(goldenRooms: number) {
+  const rewardedItemsFromGoldenRooms: Partial<Record<Item, number>> = {};
+
+  for (let i = 0; i < goldenRooms; i++) {
+    const goldenRoomRewards = getGoldenRoomRewards();
+
+    // Keep track of all golden room rewards
+    for (const reward of goldenRoomRewards) {
+      rewardedItemsFromGoldenRooms[reward.item] =
+        (rewardedItemsFromGoldenRooms[reward.item] ?? 0) + reward.quantity;
+    }
+  }
+
+  return rewardedItemsFromGoldenRooms;
+}
+
 function getGoldenRoomRewards(): [Reward, Reward] {
   const random = Math.random();
 

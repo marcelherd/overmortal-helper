@@ -3,11 +3,18 @@ import { computed, ref, type Ref } from 'vue';
 
 import type { ShoppingCart } from '@/modules/overmortal/events/types';
 import {
+  getExpectedRewardsByGoldenRooms,
+  getGuaranteedRewardsByConstructions,
   shop,
   simulateRequiredConstructions,
   type StarscraperSimulationResults,
 } from '@/modules/overmortal/events/starscraper';
-import { SimulationScenarios, type SimulationScenario } from '@/modules/overmortal/simulation';
+import {
+  SimulationScenarios,
+  type SimulationScenario,
+  supportsAverageResults,
+} from '@/modules/overmortal/simulation';
+import { Items } from '@/modules/overmortal/items';
 
 const cart: Ref<ShoppingCart> = ref([
   [0, 0, 0],
@@ -35,11 +42,44 @@ const checkoutPrice = computed(() => {
 const results: Ref<StarscraperSimulationResults | null> = ref(null);
 
 const onClickRunSimulation = () => {
-  results.value = simulateRequiredConstructions(cart.value, {
-    initialAstralPearls: initialAstralPearls.value,
-    minimumFloors: minimumFloorToSimulate.value,
-    simulationScenario: simulationScenario.value,
-  });
+  if (iterations.value === 1 || !supportsAverageResults(simulationScenario.value)) {
+    results.value = simulateRequiredConstructions(cart.value, {
+      initialAstralPearls: initialAstralPearls.value,
+      minimumFloors: minimumFloorToSimulate.value,
+      simulationScenario: simulationScenario.value,
+    });
+  } else {
+    let totalConstructions = 0;
+    let totalGoldenRoomsConstructed = 0;
+
+    for (let i = 0; i < iterations.value; i++) {
+      const { constructions, goldenRoomsConstructed } = simulateRequiredConstructions(cart.value, {
+        initialAstralPearls: initialAstralPearls.value,
+        minimumFloors: minimumFloorToSimulate.value,
+        simulationScenario: simulationScenario.value,
+      });
+
+      totalConstructions += constructions;
+      totalGoldenRoomsConstructed += goldenRoomsConstructed;
+    }
+
+    const averageConstructions = totalConstructions / iterations.value;
+    const averageGoldenRoomsConstructed = totalGoldenRoomsConstructed / iterations.value;
+
+    const guaranteedRewards = getGuaranteedRewardsByConstructions(averageConstructions);
+    const goldenRoomRewards = getExpectedRewardsByGoldenRooms(averageGoldenRoomsConstructed);
+
+    // Golden rooms don't give Living Earth
+    const acquiredLivingEarth = guaranteedRewards[Items.LivingEarth] ?? 0;
+
+    results.value = {
+      constructions: averageConstructions,
+      acquiredLivingEarth,
+      guaranteedRewards,
+      goldenRoomsConstructed: averageGoldenRoomsConstructed,
+      goldenRoomRewards,
+    };
+  }
 };
 </script>
 
@@ -80,14 +120,17 @@ const onClickRunSimulation = () => {
             </option>
           </select>
         </div>
-        <div v-if="simulationScenario === SimulationScenarios.Average">
-          <label for="iterations">No. of simulations to run (work in progress):</label>
-          <input id="iterations" type="number" v-model="iterations" min="1" max="100000" disabled />
+        <div v-if="supportsAverageResults(simulationScenario)">
+          <label for="iterations">No. of simulations to run:</label>
+          <input id="iterations" type="number" v-model="iterations" min="1" max="100000" />
         </div>
       </div>
     </div>
     <button @click="onClickRunSimulation">Run simulation</button>
     <div v-if="results" class="results">
+      <p style="margin-bottom: 8px; font-weight: bold">
+        Ran simulation {{ iterations }} time(s), results:
+      </p>
       <p>Required constructions: {{ results.constructions }}</p>
       <p>Living Earth acquired: {{ results.acquiredLivingEarth }}</p>
       <p>Guaranteed rewards from challenges: {{ results.guaranteedRewards }}</p>
